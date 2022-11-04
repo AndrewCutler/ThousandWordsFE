@@ -1,15 +1,16 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Text } from 'react-native';
+import Home from '../home/Home';
 import LoginSplash from '../login-splash/LoginSplash';
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
-const AppNavigator = () => {
+const AppNavigator = (): React.ReactElement => {
   return (
     <NavigationContainer>
-      <Navigator>
+      <Navigator initialRouteName='Hello'>
         <Screen name='Hello' component={LoginSplash} />
+        <Screen name='Home' component={Home} />
       </Navigator>
     </NavigationContainer>
   );

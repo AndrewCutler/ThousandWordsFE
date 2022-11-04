@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, StyleSheet, TextInput, View } from 'react-native';
 import { authenticate } from '../../services/authentication';
 
 const styles = StyleSheet.create({
@@ -12,14 +12,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const LoginSplash = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-
+const LoginSplash = ({ navigation }): React.ReactElement => {
   const [password, setPassword] = useState<string>('');
   const [username, setUsername] = useState<string>('');
 
   const handleLogin = async () => {
     await authenticate(username, password);
+    navigation.navigate('Home');
   };
 
   const handleRegister = () => console.log('register');
