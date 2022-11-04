@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { authenticate } from '../../services/authentication';
 
 const styles = StyleSheet.create({
   textInput: {
@@ -17,30 +18,14 @@ const LoginSplash = () => {
   const [password, setPassword] = useState<string>('');
   const [username, setUsername] = useState<string>('');
 
-  if (!isAuthenticated) {
-    return (
-      <View>
-        <Text>Sign up</Text>
-        <TextInput
-          style={styles.textInput}
-          value={username}
-          placeholder='Username'
-          onChangeText={(text) => setUsername(text)}
-        />
-        <TextInput
-          value={password}
-          style={styles.textInput}
-          placeholder='Password'
-          onChangeText={(text) => setPassword(text)}
-          secureTextEntry
-        />
-      </View>
-    );
-  }
+  const handleLogin = async () => {
+    await authenticate(username, password);
+  };
+
+  const handleRegister = () => console.log('register');
 
   return (
     <View>
-      <Text>Sign up</Text>
       <TextInput
         style={styles.textInput}
         value={username}
@@ -54,6 +39,8 @@ const LoginSplash = () => {
         onChangeText={(text) => setPassword(text)}
         secureTextEntry
       />
+      <Button title='Login' onPress={handleLogin} />
+      <Button title='Register' onPress={handleRegister} />
     </View>
   );
 };

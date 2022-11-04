@@ -9,7 +9,7 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Navigator>
-        <Screen name='Welcome' component={LoginSplash} />
+        <Screen name='Hello' component={LoginSplash} />
       </Navigator>
     </NavigationContainer>
   );
