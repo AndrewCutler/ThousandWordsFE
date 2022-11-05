@@ -1,10 +1,12 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import LoginSplash from '../login-splash/LoginSplash';
 
 const Home = (): React.ReactElement => {
   return (
     <View>
-      <Text>Home</Text>
+      <LoginSplash />
+      <Text>{}</Text>
     </View>
   );
 };

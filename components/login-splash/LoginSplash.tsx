@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
-import { Button, StyleSheet, TextInput, View } from 'react-native';
-import { authenticate } from '../../services/authentication';
+import React, { useEffect, useState } from 'react';
+import { Button, Modal, StyleSheet, TextInput, View } from 'react-native';
+import useAuthentication from '../../hooks/useAuthentication';
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   textInput: {
     height: 40,
     margin: 12,
@@ -12,34 +16,43 @@ const styles = StyleSheet.create({
   },
 });
 
-const LoginSplash = ({ navigation }): React.ReactElement => {
+const LoginSplash = (): React.ReactElement => {
+  const { login, isAuthenticated } = useAuthentication();
+
   const [password, setPassword] = useState<string>('');
   const [username, setUsername] = useState<string>('');
 
-  const handleLogin = async () => {
-    await authenticate(username, password);
-    navigation.navigate('Home');
+  const handleLogin = (): void => {
+    if (username && password) {
+      login(username, password);
+    }
   };
 
-  const handleRegister = () => console.log('register');
+  const handleRegister = (): void => console.log('register');
 
   return (
-    <View>
-      <TextInput
-        style={styles.textInput}
-        value={username}
-        placeholder='Username'
-        onChangeText={(text) => setUsername(text)}
-      />
-      <TextInput
-        value={password}
-        placeholder='Password'
-        style={styles.textInput}
-        onChangeText={(text) => setPassword(text)}
-        secureTextEntry
-      />
-      <Button title='Login' onPress={handleLogin} />
-      <Button title='Register' onPress={handleRegister} />
+    <View style={styles.container}>
+      <Modal
+        animationType='slide'
+        visible={!isAuthenticated}
+        presentationStyle='fullScreen'
+      >
+        <TextInput
+          style={styles.textInput}
+          value={username}
+          placeholder='Username'
+          onChangeText={(text) => setUsername(text)}
+        />
+        <TextInput
+          value={password}
+          placeholder='Password'
+          style={styles.textInput}
+          onChangeText={(text) => setPassword(text)}
+          secureTextEntry
+        />
+        <Button title='Login' onPress={handleLogin} />
+        <Button title='Register' onPress={handleRegister} />
+      </Modal>
     </View>
   );
 };

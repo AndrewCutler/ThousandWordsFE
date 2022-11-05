@@ -26,6 +26,7 @@ const TabNavigator = (): React.ReactElement => {
         <Screen
           name='Albums'
           component={Home}
+          //   tabPress={() => await logout()}
           options={{
             tabBarIcon: () => <MaterialIcons name='photo-album' />,
           }}
