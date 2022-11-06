@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Button, Modal, StyleSheet, TextInput, View } from 'react-native';
 import { Actions, State, useStoreActions, useStoreState } from 'easy-peasy';
 import { IStore } from '../../store/store';
+import { useQuery } from '@tanstack/react-query';
+import Config from 'react-native-config';
 
 const styles = StyleSheet.create({
   container: {
@@ -22,6 +24,22 @@ const LoginSplash = (): React.ReactElement => {
   const login = useStoreActions((actions: Actions<IStore>) => actions.login);
   const isAuthenticated = useStoreState(
     (state: State<IStore>) => state.isAuthenticated
+  );
+
+  const { status, data, error, isFetching } = useQuery(
+    ['getById'],
+    async () => {
+      console.log(
+        'https://thousand-words.azurewebsites.net/api/' +
+          'image?id=89e67008-777d-40f4-6e84-08dab907ab80'
+      );
+      const data = await fetch(
+        'https://thousand-words.azurewebsites.net/api/' +
+          'image?id=89e67008-777d-40f4-6e84-08dab907ab80'
+      ).then((response) => response.json());
+      console.log(data);
+      return data;
+    }
   );
 
   const [password, setPassword] = useState<string>('');
