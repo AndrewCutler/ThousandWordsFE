@@ -4,10 +4,16 @@ import Home from '../home/Home';
 import { NavigationContainer } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { Actions, useStoreActions } from 'easy-peasy';
+import { IStore } from '../../store/store';
+import Albums from '../albums/Albums';
 
 const { Navigator, Screen } = createMaterialBottomTabNavigator();
 
 const TabNavigator = (): React.ReactElement => {
+  // TODO: createTypedActions
+  const logout = useStoreActions((actions: Actions<IStore>) => actions.logout);
+
   return (
     <NavigationContainer>
       <Navigator initialRouteName='Home'>
@@ -25,8 +31,10 @@ const TabNavigator = (): React.ReactElement => {
         />
         <Screen
           name='Albums'
-          component={Home}
-          //   tabPress={() => await logout()}
+          component={Albums}
+          listeners={(_) => ({
+            tabPress: () => logout(),
+          })}
           options={{
             tabBarIcon: () => <MaterialIcons name='photo-album' />,
           }}

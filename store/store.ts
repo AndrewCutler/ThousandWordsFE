@@ -1,8 +1,9 @@
-import { action, Action, createStore } from 'easy-peasy';
+import { action, Action, computed, Computed, createStore } from 'easy-peasy';
 
-interface IStore {
+export interface IStore {
   username: string | undefined;
   password: string | undefined;
+  isAuthenticated: Computed<IStore, boolean>;
   login: Action<IStore, { username: string; password: string }>;
   logout: Action<IStore, void>;
 }
@@ -10,6 +11,7 @@ interface IStore {
 const store = createStore<IStore>({
   username: undefined,
   password: undefined,
+  isAuthenticated: computed((state) => Boolean(state.username)),
   login: action((state, { username, password }) => {
     state.username = username;
     state.password = password;
@@ -19,3 +21,5 @@ const store = createStore<IStore>({
     state.password = undefined;
   }),
 });
+
+export default store;

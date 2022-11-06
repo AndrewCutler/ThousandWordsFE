@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Modal, StyleSheet, TextInput, View } from 'react-native';
-import useAuthentication from '../../hooks/useAuthentication';
+import { Actions, State, useStoreActions, useStoreState } from 'easy-peasy';
+import { IStore } from '../../store/store';
 
 const styles = StyleSheet.create({
   container: {
@@ -17,14 +18,18 @@ const styles = StyleSheet.create({
 });
 
 const LoginSplash = (): React.ReactElement => {
-  const { login, isAuthenticated } = useAuthentication();
+  // TODO: createTypedActions
+  const login = useStoreActions((actions: Actions<IStore>) => actions.login);
+  const isAuthenticated = useStoreState(
+    (state: State<IStore>) => state.isAuthenticated
+  );
 
   const [password, setPassword] = useState<string>('');
   const [username, setUsername] = useState<string>('');
 
   const handleLogin = (): void => {
     if (username && password) {
-      login(username, password);
+      login({ username, password });
     }
   };
 

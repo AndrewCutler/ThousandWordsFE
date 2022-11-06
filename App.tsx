@@ -1,7 +1,11 @@
-import { StyleSheet, View } from 'react-native';
-import LoginSplash from './components/login-splash/LoginSplash';
+import { StoreProvider } from 'easy-peasy';
 import TabNavigator from './components/tab-navigator/TabNavigator';
+import store from './store/store';
 
 export default function App() {
-  return <TabNavigator />;
+  return (
+    <StoreProvider store={store}>
+      <TabNavigator />
+    </StoreProvider>
+  );
 }
