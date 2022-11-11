@@ -7,6 +7,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Actions, useStoreActions } from 'easy-peasy';
 import { IStore } from '../../store/store';
 import Albums from '../albums/Albums';
+import Add from '../add/Add';
 
 const { Navigator, Screen } = createMaterialBottomTabNavigator();
 
@@ -19,7 +20,7 @@ const TabNavigator = (): React.ReactElement => {
       <Navigator initialRouteName='Home'>
         <Screen
           name='Add'
-          component={Home}
+          component={Add}
           options={{
             tabBarIcon: () => <MaterialCommunityIcons name='camera' />,
           }}
