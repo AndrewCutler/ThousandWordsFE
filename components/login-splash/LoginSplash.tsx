@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Modal, StyleSheet, TextInput, View } from 'react-native';
 import { Actions, State, useStoreActions, useStoreState } from 'easy-peasy';
 import { IStore } from '../../store/store';
-import { useQuery } from '@tanstack/react-query';
-import Config from 'react-native-config';
-import { getImageById } from '../../api/queries';
 
 const styles = StyleSheet.create({
   container: {
@@ -26,14 +23,6 @@ const LoginSplash = (): React.ReactElement => {
   const isAuthenticated = useStoreState(
     (state: State<IStore>) => state.isAuthenticated
   );
-
-  const { status, data, error, isFetching } = useQuery(
-    getImageById('89e67008-777d-40f4-6e84-08dab907ab80')
-  );
-
-  useEffect(() => {
-    // console.log(data, isFetching);
-  }, [status, data, error, isFetching]);
 
   const [password, setPassword] = useState<string>('');
   const [username, setUsername] = useState<string>('');
