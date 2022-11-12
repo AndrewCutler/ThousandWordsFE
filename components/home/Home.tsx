@@ -4,9 +4,9 @@ import LoginSplash from '../login-splash/LoginSplash';
 
 const Home = (): React.ReactElement => {
   return (
-    <View>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <LoginSplash />
-      <Text>{}</Text>
+      <Text>Welcome home</Text>
     </View>
   );
 };
