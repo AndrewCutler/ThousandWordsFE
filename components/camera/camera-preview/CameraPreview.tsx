@@ -1,30 +1,42 @@
 import { CameraCapturedPicture } from 'expo-camera';
 import React, { ReactElement } from 'react';
-import { ImageBackground, View } from 'react-native';
+import { ImageBackground, Modal, View } from 'react-native';
+import { Button } from 'react-native-paper';
 
 const CameraPreview = ({
   photo,
+  onDiscard,
 }: {
   photo: CameraCapturedPicture;
+  onDiscard: () => void;
 }): ReactElement => {
-  if (!photo) {
-    return <></>;
-  }
-
   return (
-    <View
-      style={{
-        flex: 1,
-        width: '100%',
-        height: '100%',
-      }}
-    >
-      <ImageBackground
-        source={{ uri: photo && photo.uri }}
-        style={{
-          flex: 1,
-        }}
-      />
+    <View style={{ flex: 0.75, width: '75%' }}>
+      <Modal
+        animationType='slide'
+        visible={!!photo}
+        presentationStyle='pageSheet'
+      >
+        <ImageBackground
+          source={{ uri: photo && photo.uri }}
+          style={{
+            flex: 1,
+          }}
+        />
+        <View
+          style={{
+            flex: 1,
+            alignItems: 'center',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Button color='red' onPress={onDiscard}>
+            Discard
+          </Button>
+          <Button>Save to album</Button>
+        </View>
+      </Modal>
     </View>
   );
 };

@@ -65,6 +65,10 @@ const Camera = ({ navigation }): React.ReactElement => {
     navigation.navigate('Home');
   };
 
+  const handleDiscard = (): void => {
+    setImageData(undefined);
+  };
+
   return (
     <View
       style={{
@@ -116,7 +120,7 @@ const Camera = ({ navigation }): React.ReactElement => {
       ) : (
         <Button onPress={handleShowCamera}>Show camera</Button>
       )}
-      <CameraPreview photo={imageData} />
+      <CameraPreview photo={imageData} onDiscard={handleDiscard} />
     </View>
   );
 };
