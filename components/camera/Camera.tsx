@@ -56,7 +56,9 @@ const Camera = ({ navigation }): React.ReactElement => {
       throw new Error('Camera does not exist.');
     }
 
-    const image: CameraCapturedPicture = await camera.takePictureAsync();
+    const image: CameraCapturedPicture = await camera.takePictureAsync({
+      base64: true,
+    });
 
     setImageData(image);
   };
