@@ -34,11 +34,7 @@ const CameraPreview = ({
         <Button color='red' onPress={onDiscard}>
           Discard
         </Button>
-        <ImageSave
-          base64={photo?.base64}
-          anchor={<Button>Save to album</Button>}
-        />
-        {/* <Button>Save to album</Button> */}
+        <ImageSave base64={photo?.base64} />
       </View>
     </Modal>
   </View>

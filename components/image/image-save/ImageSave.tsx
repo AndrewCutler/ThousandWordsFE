@@ -1,17 +1,13 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactElement, ReactNode, useState } from 'react';
 import { View } from 'react-native';
-import { Menu, TextInput } from 'react-native-paper';
+import { Button, Menu } from 'react-native-paper';
 import { AlbumDTO } from '../../../api/api';
 
 const fakeAlbums: AlbumDTO[] = [];
 
-const ImageSave = ({
-  base64,
-  anchor,
-}: {
-  base64?: string;
-  anchor: ReactNode;
-}): ReactElement => {
+const ImageSave = ({ base64 }: { base64?: string }): ReactElement => {
+  const [showMenu, setShowMenu] = useState<boolean>(false);
+
   const handleAlbumSelect = (albumId?: string): void => {
     if (albumId) {
       // save to album
@@ -21,8 +17,15 @@ const ImageSave = ({
   };
 
   return (
-    <View style={{ paddingTop: 50 }}>
-      <Menu visible={!!base64} onDismiss={undefined} anchor={anchor}>
+    <View>
+      <Menu
+        visible={showMenu}
+        style={{ zIndex: 10000 }}
+        onDismiss={() => setShowMenu(false)}
+        anchor={
+          <Button onPress={() => setShowMenu(true)}>Save to album</Button>
+        }
+      >
         <Menu.Item title='None' onPress={() => handleAlbumSelect()} />
         {fakeAlbums.map(({ name, id }) => {
           return (
