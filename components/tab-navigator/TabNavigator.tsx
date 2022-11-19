@@ -1,10 +1,10 @@
 import React from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import Home from '../home/Home';
 import { NavigationContainer } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Actions, useStoreActions } from 'easy-peasy';
+import Home from '../home/Home';
 import { IStore } from '../../store/store';
 import Albums from '../albums/Albums';
 import Camera from '../camera/Camera';
@@ -33,7 +33,7 @@ const TabNavigator = (): React.ReactElement => {
         <Screen
           name='Albums'
           component={Albums}
-          listeners={(_) => ({
+          listeners={() => ({
             tabPress: () => logout(),
           })}
           options={{

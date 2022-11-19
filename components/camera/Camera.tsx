@@ -5,9 +5,9 @@ import {
   CameraCapturedPicture,
   CameraType,
 } from 'expo-camera';
-import { PermissionStatus as EPermissionStatus } from '../../node_modules/expo-modules-core/src/PermissionsInterface';
 import { Button } from 'react-native-paper';
 import { useIsFocused } from '@react-navigation/native';
+import { PermissionStatus as EPermissionStatus } from 'expo-modules-core/src/PermissionsInterface';
 import CameraPreview from './camera-preview/CameraPreview';
 
 const Camera = ({ navigation }): React.ReactElement => {
@@ -23,9 +23,10 @@ const Camera = ({ navigation }): React.ReactElement => {
   const isFocused = useIsFocused();
 
   useEffect(() => {
-    (async () => {
-      const { status } = await ExpoCamera.requestCameraPermissionsAsync();
-      setStatus(status);
+    void (async () => {
+      const { status: cameraStatus } =
+        await ExpoCamera.requestCameraPermissionsAsync();
+      setStatus(cameraStatus);
     })();
 
     if (!isFocused) {
@@ -52,10 +53,6 @@ const Camera = ({ navigation }): React.ReactElement => {
   };
 
   const handleTakePicture = async (): Promise<void> => {
-    if (!camera) {
-      throw new Error('Camera does not exist.');
-    }
-
     const image: CameraCapturedPicture = await camera.takePictureAsync({
       base64: true,
     });
@@ -94,7 +91,7 @@ const Camera = ({ navigation }): React.ReactElement => {
             ref={(r) => {
               camera = r;
             }}
-          ></ExpoCamera>
+          />
           <View
             style={{
               flex: 1,
