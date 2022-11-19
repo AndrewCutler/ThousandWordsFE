@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { TouchableOpacity, Text, View, Alert } from 'react-native';
+import { TouchableOpacity, View, Alert } from 'react-native';
 import {
   Camera as ExpoCamera,
   CameraCapturedPicture,
