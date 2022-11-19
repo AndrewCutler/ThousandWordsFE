@@ -20,7 +20,6 @@ const ImageSave = ({ base64 }: { base64?: string }): ReactElement => {
     <View>
       <Menu
         visible={showMenu}
-        style={{ zIndex: 10000 }}
         onDismiss={() => setShowMenu(false)}
         anchor={
           <Button onPress={() => setShowMenu(true)}>Save to album</Button>

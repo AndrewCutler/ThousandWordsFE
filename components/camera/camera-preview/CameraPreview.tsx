@@ -1,7 +1,7 @@
 import { CameraCapturedPicture } from 'expo-camera';
 import React, { ReactElement } from 'react';
-import { ImageBackground, Modal, View } from 'react-native';
-import { Button } from 'react-native-paper';
+import { ImageBackground, View } from 'react-native';
+import { Button, Modal, Portal } from 'react-native-paper';
 import ImageSave from '../../image/image-save/ImageSave';
 
 const CameraPreview = ({
@@ -11,12 +11,8 @@ const CameraPreview = ({
   photo: CameraCapturedPicture;
   onDiscard: () => void;
 }): ReactElement => (
-  <View style={{ flex: 0.75, width: '75%' }}>
-    <Modal
-      animationType='slide'
-      visible={!!photo}
-      presentationStyle='fullScreen'
-    >
+  <Portal>
+    <Modal visible={!!photo}>
       <ImageBackground
         source={{ uri: photo && photo.uri }}
         style={{
@@ -37,7 +33,7 @@ const CameraPreview = ({
         <ImageSave base64={photo?.base64} />
       </View>
     </Modal>
-  </View>
+  </Portal>
 );
 
 export default CameraPreview;
