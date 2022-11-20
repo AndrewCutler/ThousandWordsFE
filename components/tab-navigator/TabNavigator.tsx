@@ -8,6 +8,7 @@ import Home from '../home/Home';
 import { IStore } from '../../store/store';
 import Albums from '../albums/Albums';
 import Camera from '../camera/Camera';
+import NewAlbum from '../albums/new-album/NewAlbum';
 
 const { Navigator, Screen } = createMaterialBottomTabNavigator();
 
@@ -40,6 +41,7 @@ const TabNavigator = (): React.ReactElement => {
             tabBarIcon: () => <MaterialIcons name='photo-album' />,
           }}
         />
+        <Screen name='New Album' component={NewAlbum} />
       </Navigator>
     </NavigationContainer>
   );

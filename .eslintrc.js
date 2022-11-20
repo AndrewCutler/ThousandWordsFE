@@ -21,6 +21,15 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint', 'import', 'react-hooks'],
   rules: {
+    'max-len': [
+      'warn',
+      {
+        code: 140,
+        tabWidth: 4,
+        ignoreUrls: true,
+        ignoreTemplateLiterals: true,
+      },
+    ],
     '@typescript-eslint/strict-boolean-expressions': 'off',
     'react/require-default-props': [0],
     '@typescript-eslint/quotes': [
