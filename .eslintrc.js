@@ -21,6 +21,8 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint', 'import', 'react-hooks'],
   rules: {
+    '@typescript-eslint/strict-boolean-expressions': 'off',
+    'react/require-default-props': [0],
     '@typescript-eslint/quotes': [
       'error',
       'single',
@@ -28,6 +30,7 @@ module.exports = {
         allowTemplateLiterals: true,
       },
     ],
+
     '@typescript-eslint/no-misused-promises': [
       'error',
       {

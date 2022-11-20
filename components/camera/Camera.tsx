@@ -10,6 +10,7 @@ import { useIsFocused } from '@react-navigation/native';
 import { PermissionStatus as EPermissionStatus } from 'expo-modules-core/src/PermissionsInterface';
 import CameraPreview from './camera-preview/CameraPreview';
 
+// eslint-disable-next-line react/prop-types
 const Camera = ({ navigation }): React.ReactElement => {
   const [imageData, setImageData] = useState<
     CameraCapturedPicture | undefined
@@ -24,8 +25,7 @@ const Camera = ({ navigation }): React.ReactElement => {
 
   useEffect(() => {
     void (async () => {
-      const { status: cameraStatus } =
-        await ExpoCamera.requestCameraPermissionsAsync();
+      const { status: cameraStatus } = await ExpoCamera.requestCameraPermissionsAsync();
       setStatus(cameraStatus);
     })();
 
@@ -61,6 +61,7 @@ const Camera = ({ navigation }): React.ReactElement => {
   };
 
   const handleDismiss = (): void => {
+    // eslint-disable-next-line react/prop-types
     navigation.navigate('Home');
   };
 

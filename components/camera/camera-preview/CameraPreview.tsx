@@ -8,13 +8,13 @@ const CameraPreview = ({
   photo,
   onDiscard,
 }: {
-  photo: CameraCapturedPicture;
+  photo?: CameraCapturedPicture;
   onDiscard: () => void;
 }): ReactElement => (
   <Portal>
     <Modal visible={!!photo}>
       <ImageBackground
-        source={{ uri: photo && photo.uri }}
+        source={{ uri: photo?.uri }}
         style={{
           flex: 1,
         }}
