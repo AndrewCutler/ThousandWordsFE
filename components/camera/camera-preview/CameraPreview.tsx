@@ -12,26 +12,17 @@ const CameraPreview = ({
   onDiscard: () => void;
 }): ReactElement => (
   <Portal>
-    <Modal visible={!!photo}>
+    <Modal visible={!!photo} contentContainerStyle={{ backgroundColor: 'white', padding: 20, height: '75%' }}>
       <ImageBackground
         source={{ uri: photo?.uri }}
         style={{
           flex: 1,
         }}
       />
-      <View
-        style={{
-          flex: 1,
-          alignItems: 'center',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}
-      >
-        <Button color='red' onPress={onDiscard}>
-          Discard
-        </Button>
-        <ImageSave base64={photo?.base64} />
-      </View>
+      <Button color='red' onPress={onDiscard}>
+        Discard
+      </Button>
+      <ImageSave base64={photo?.base64} />
     </Modal>
   </Portal>
 );

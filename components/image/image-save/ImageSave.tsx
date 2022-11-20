@@ -26,15 +26,13 @@ const ImageSave = ({ base64 }: { base64?: string }): ReactElement => {
         }
       >
         <Menu.Item title='None' onPress={() => handleAlbumSelect()} />
-        {fakeAlbums.map(({ name, id }) => {
-          return (
-            <Menu.Item
-              key={id}
-              title={name}
-              onPress={() => handleAlbumSelect(id)}
-            />
-          );
-        })}
+        {fakeAlbums.map(({ name, id }) => (
+          <Menu.Item
+            key={id}
+            title={name}
+            onPress={() => handleAlbumSelect(id)}
+          />
+        ))}
       </Menu>
     </View>
   );
