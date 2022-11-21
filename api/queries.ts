@@ -1,5 +1,7 @@
 import { QueryFunction, QueryKey } from '@tanstack/react-query';
-import { Api, ApiConfig } from './api';
+import {
+  Api, ApiConfig, HttpResponse, ImageDTO,
+} from './api';
 
 interface IQuery {
   queryKey: QueryKey;
@@ -14,7 +16,7 @@ export const getImageById = (id: string): IQuery => {
   const { api } = new Api(apiConfig);
 
   const queryKey = ['imageById', id];
-  const queryFn = async () => {
+  const queryFn = async (): HttpResponse<ImageDTO, any> => {
     const response = await api.imageList({ id });
 
     if (!response.ok) {
@@ -25,4 +27,23 @@ export const getImageById = (id: string): IQuery => {
   };
 
   return { queryKey, queryFn };
+};
+
+// TODO: fix return type
+export const createAlbum = (userId: string, name: string): any => {
+  const { api } = new Api(apiConfig);
+
+  const mutationFn = async (): HttpResponse<void, any> => {
+    const response = await api.albumCreate({ userId, name });
+
+    if (!response.ok) {
+      throw new Error('Failed to retrieve image by id.');
+    }
+
+    console.log(response);
+
+    return response;
+  };
+
+  return { mutationFn };
 };

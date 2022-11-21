@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
-import { Button, Modal, StyleSheet, TextInput, View } from 'react-native';
-import { Actions, State, useStoreActions, useStoreState } from 'easy-peasy';
+import {
+  Button, Modal, StyleSheet, TextInput, View,
+} from 'react-native';
+import {
+  Actions, State, useStoreActions, useStoreState,
+} from 'easy-peasy';
 import { IStore } from '../../store/store';
 
 const styles = StyleSheet.create({
@@ -21,7 +25,7 @@ const LoginSplash = (): React.ReactElement => {
   // TODO: createTypedActions
   const login = useStoreActions((actions: Actions<IStore>) => actions.login);
   const isAuthenticated = useStoreState(
-    (state: State<IStore>) => state.isAuthenticated
+    (state: State<IStore>) => state.isAuthenticated,
   );
 
   const [password, setPassword] = useState<string>('');
