@@ -17,14 +17,19 @@ const NewAlbum = (): ReactElement => {
     mutate({ name, userId: '' });
   };
 
+  return (
     <View style={{
-      flex: 1, backgroundColor: 'white', padding: 20, alignItems: 'center',
+      flex: 1,
+      backgroundColor: 'white',
+      padding: 20,
+      alignItems: 'center',
     }}
     >
       <Text>New album</Text>
       <TextInput label='Album name' value={name} onChangeText={(text) => setName(text)} />
       <Button disabled={name?.length < 4} onPress={handleSave}>Save</Button>
-    </View>;
+    </View>
+  );
 };
 
 export default NewAlbum;

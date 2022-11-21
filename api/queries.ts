@@ -40,6 +40,8 @@ export const createAlbum = (userId: string, name: string): any => {
       throw new Error('Failed to retrieve image by id.');
     }
 
+    console.log(response);
+
     return response;
   };
 

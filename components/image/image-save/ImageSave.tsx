@@ -20,7 +20,7 @@ const fakeAlbums: AlbumDTO[] = [
   },
 ];
 
-const ImageSave = ({ base64, navigation, onClose }: { base64?: string; onClose: () => void; navigation: any; }): ReactElement => {
+const ImageSave = ({ base64 }: { base64?: string; }): ReactElement => {
   const [showNewAlbumForm, setShowNewAlbumForm] = useState<boolean>(false);
   const [showMenu, setShowMenu] = useState<boolean>(false);
 
@@ -38,30 +38,30 @@ const ImageSave = ({ base64, navigation, onClose }: { base64?: string; onClose: 
   };
 
   return (
-    <View>
-      <Menu
-        visible={showMenu}
-        onDismiss={() => setShowMenu(false)}
-        anchor={
-          <Button onPress={() => setShowMenu(true)}>Save to album</Button>
+    <Portal.Host>
+      <View>
+        <Menu
+          visible={showMenu}
+          onDismiss={() => setShowMenu(false)}
+          anchor={
+            <Button onPress={() => setShowMenu(true)}>Save to album</Button>
         }
-      >
-        <Menu.Item title='None' onPress={() => handleAlbumSelect()} />
-        <Divider />
-        {fakeAlbums.map(({ name, id }) => (
-          <Menu.Item
-            key={id}
-            title={name}
-            onPress={() => handleAlbumSelect(id)}
-          />
-        ))}
-        {fakeAlbums?.length > 0 && <Divider />}
-        <Menu.Item title='Create new album' onPress={handleNewAlbum} style={{ backgroundColor: '#039948' }} />
-      </Menu>
-      <Portal>
-        {showNewAlbumForm && <NewAlbum />}
-      </Portal>
-    </View>
+        >
+          <Menu.Item title='None' onPress={() => handleAlbumSelect()} />
+          <Divider />
+          {fakeAlbums.map(({ name, id }) => (
+            <Menu.Item
+              key={id}
+              title={name}
+              onPress={() => handleAlbumSelect(id)}
+            />
+          ))}
+          {fakeAlbums?.length > 0 && <Divider />}
+          <Menu.Item title='Create new album' onPress={handleNewAlbum} style={{ backgroundColor: '#039948' }} />
+        </Menu>
+        {showNewAlbumForm && <Portal><NewAlbum /></Portal>}
+      </View>
+    </Portal.Host>
   );
 };
 

@@ -120,7 +120,7 @@ const Camera = ({ navigation }): React.ReactElement => {
       ) : (
         <Button onPress={handleShowCamera}>Show camera</Button>
       )}
-      <CameraPreview navigation={navigation} photo={imageData} onDiscard={handleDiscard} />
+      <CameraPreview photo={imageData} onDiscard={handleDiscard} />
     </View>
   );
 };
