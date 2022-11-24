@@ -12,7 +12,17 @@ module.exports = {
     'plugin:import/warnings',
     'plugin:import/typescript',
   ],
-  overrides: [],
+  overrides: [
+    {
+      files: ['**/*.ts', '**/*.tsx'],
+      plugins: ['@typescript-eslint'],
+      extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+      parser: '@typescript-eslint/parser',
+      parserOptions: {
+        project: ['./tsconfig.json'],
+      },
+    },
+  ],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
@@ -21,10 +31,11 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint', 'import', 'react-hooks'],
   rules: {
+    'no-return-await': false,
     'max-len': [
-      'warn',
+      'error',
       {
-        code: 140,
+        code: 100,
         tabWidth: 4,
         ignoreUrls: true,
         ignoreTemplateLiterals: true,

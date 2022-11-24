@@ -265,6 +265,7 @@ export class HttpClient<SecurityDataType = unknown> {
             : payloadFormatter(body),
       }
     ).then(async (response) => {
+      console.log(response.status, response.statusText, response.body);
       const r = response as HttpResponse<T, E>;
       r.data = null as unknown as T;
       r.error = null as unknown as E;
