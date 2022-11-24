@@ -6,11 +6,11 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'standard-with-typescript',
-    'prettier',
     'airbnb',
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:import/typescript',
+    'prettier',
   ],
   overrides: [
     {
@@ -31,7 +31,9 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint', 'import', 'react-hooks'],
   rules: {
-    'no-return-await': false,
+    'no-return-await': [0],
+    'implicit-arrow-linebreak': [0],
+    'object-curly-newline': [0],
     'max-len': [
       'error',
       {

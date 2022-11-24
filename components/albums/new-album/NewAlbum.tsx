@@ -3,14 +3,9 @@ import React, { ReactElement, useEffect, useState } from 'react';
 import { Text, TextInput, View } from 'react-native';
 import { Button, Snackbar } from 'react-native-paper';
 import { createAlbum } from '../../../api/queries';
-import { Api } from '../../../api/api';
-
-const { api } = new Api({
-  baseUrl: 'https://thousand-words.azurewebsites.net',
-});
 
 const NewAlbum = (): ReactElement => {
-  const { mutate, isLoading, isError, error, isSuccess } = useMutation({
+  const { mutate, isError, error, isSuccess } = useMutation({
     mutationFn: async ({ userId, name }: { userId: string; name: string }) =>
       createAlbum(userId, name),
   });
