@@ -1,7 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { QueryFunction, QueryKey } from '@tanstack/react-query';
-import {
-  Api, ApiConfig, HttpResponse, ImageDTO,
-} from './api';
+import { Api, ApiConfig, HttpResponse, ImageDTO } from './api';
 
 interface IQuery {
   queryKey: QueryKey;
@@ -29,21 +28,17 @@ export const getImageById = (id: string): IQuery => {
   return { queryKey, queryFn };
 };
 
-// TODO: fix return type
-export const createAlbum = (userId: string, name: string): any => {
+export const createAlbum = async (
+  userId: string,
+  name: string
+): HttpResponse<void, any> => {
   const { api } = new Api(apiConfig);
 
-  const mutationFn = async (): HttpResponse<void, any> => {
-    const response = await api.albumCreate({ userId, name });
+  const response = await api.albumCreate({ userId, name });
 
-    if (!response.ok) {
-      throw new Error('Failed to retrieve image by id.');
-    }
+  if (!response.ok) {
+    throw new Error('Failed to retrieve image by id.');
+  }
 
-    console.log(response);
-
-    return response;
-  };
-
-  return { mutationFn };
+  return response;
 };
