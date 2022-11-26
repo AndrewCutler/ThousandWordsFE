@@ -1,59 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { QueryFunction, QueryKey } from '@tanstack/react-query';
-import { Api, ApiConfig, HttpResponse, ImageDTO } from './api';
-
-interface IQuery {
-	queryKey: QueryKey;
-	queryFn: QueryFunction<
-		any,
-		QueryKey
-	>;
-}
+import { AlbumDTO, Api, ApiConfig, HttpResponse } from './api';
 
 const apiConfig: ApiConfig = {
 	baseUrl: 'https://thousand-words.azurewebsites.net'
 };
 
-export const getImageById = (id: string): IQuery => {
-	const {
-		api
-	} =
-		new Api(
-			apiConfig
-		);
+export const getUserAlbums = async (userId: string): AlbumDTO[] => {
+  const { api } = new Api(apiConfig);
 
-	const queryKey =
-		[
-			'imageById',
-			id
-		];
-	const queryFn =
-		async (): HttpResponse<
-			ImageDTO,
-			any
-		> => {
-			const response =
-				await api.imageList(
-					{
-						id
-					}
-				);
+  const response = await api.albumList({ userId });
 
-			if (
-				!response.ok
-			) {
-				throw new Error(
-					'Failed to retrieve image by id.'
-				);
-			}
+  if (!response.ok) {
+    throw new Error('Failed to retrieve albums by user id.');
+  }
 
-			return response;
-		};
-
-	return {
-		queryKey,
-		queryFn
-	};
+  return response.data;
 };
 
 export const createAlbum = async (userId: string, name: string): HttpResponse<void, any> => {
