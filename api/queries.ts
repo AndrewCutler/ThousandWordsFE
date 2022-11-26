@@ -3,7 +3,7 @@ import { QueryFunction, QueryKey } from '@tanstack/react-query';
 import { AlbumDTO, Api, ApiConfig, HttpResponse } from './api';
 
 const apiConfig: ApiConfig = {
-  baseUrl: 'https://thousand-words.azurewebsites.net',
+	baseUrl: 'https://thousand-words.azurewebsites.net'
 };
 
 export const getUserAlbums = async (userId: string): AlbumDTO[] => {
@@ -18,17 +18,29 @@ export const getUserAlbums = async (userId: string): AlbumDTO[] => {
   return response.data;
 };
 
-export const createAlbum = async (
-  userId: string,
-  name: string
-): HttpResponse<void, any> => {
-  const { api } = new Api(apiConfig);
+export const createAlbum = async (userId: string, name: string): HttpResponse<void, any> => {
+	const {
+		api
+	} =
+		new Api(
+			apiConfig
+		);
 
-  const response = await api.albumCreate({ userId, name });
+	const response =
+		await api.albumCreate(
+			{
+				userId,
+				name
+			}
+		);
 
-  if (!response.ok) {
-    throw new Error('Failed to retrieve image by id.');
-  }
+	if (
+		!response.ok
+	) {
+		throw new Error(
+			'Failed to retrieve image by id.'
+		);
+	}
 
-  return response;
+	return response;
 };
