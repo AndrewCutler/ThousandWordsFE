@@ -7,8 +7,6 @@ module.exports = {
     'plugin:react/recommended',
     'standard-with-typescript',
     'airbnb',
-    'plugin:import/errors',
-    'plugin:import/warnings',
     'plugin:import/typescript',
     'prettier',
   ],
