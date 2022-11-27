@@ -9,15 +9,15 @@ import store from './store/store';
 const queryClient = new QueryClient();
 
 const App = (): ReactElement => (
-  <QueryClientProvider client={queryClient}>
-    <PaperProvider>
-      <SafeAreaProvider>
-        <StoreProvider store={store}>
-          <TabNavigator />
-        </StoreProvider>
-      </SafeAreaProvider>
-    </PaperProvider>
-  </QueryClientProvider>
+	<QueryClientProvider client={queryClient}>
+		<PaperProvider>
+			<SafeAreaProvider>
+				<StoreProvider store={store}>
+					<TabNavigator />
+				</StoreProvider>
+			</SafeAreaProvider>
+		</PaperProvider>
+	</QueryClientProvider>
 );
 
 export default App;
