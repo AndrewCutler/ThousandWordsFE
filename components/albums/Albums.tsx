@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { ScrollView } from 'react-native';
 import { Text } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import useUser from '../../hooks/useUser';
+import useAlbums from '../../hooks/useAlbums';
 import AlbumCard from './album-card/AlbumCard';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Albums = ({ navigation }: { navigation: any }): React.ReactElement => {
-	const { albums, isError, isFetched, refetch } = useUser();
+	const { albums, isError, isFetched, refetch } = useAlbums();
 
 	const [displayText, setDisplayText] = useState<string>('');
 

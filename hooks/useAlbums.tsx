@@ -1,11 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { State, useStoreState } from 'easy-peasy';
-import { useEffect } from 'react';
 import { AlbumDTO } from '../api/api';
 import { getUserAlbums } from '../api/queries';
 import { IStore } from '../store/store';
 
-const useUser = (): { albums: AlbumDTO[]; isError: boolean; isFetched: boolean; refetch: any } => {
+const useAlbums = (): { albums: AlbumDTO[]; isError: boolean; isFetched: boolean; refetch: any } => {
 	const user = useStoreState((state: State<IStore>) => state.user);
 
 	const {
@@ -21,4 +20,4 @@ const useUser = (): { albums: AlbumDTO[]; isError: boolean; isFetched: boolean; 
 	return { albums, isError, isFetched, refetch };
 };
 
-export default useUser;
+export default useAlbums;

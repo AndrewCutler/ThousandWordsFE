@@ -10,14 +10,12 @@ import { IStore } from '../../store/store';
 import Albums from '../albums/Albums';
 import Camera from '../camera/Camera';
 import NewAlbum from '../albums/new-album/NewAlbum';
-import useUser from '../../hooks/useUser';
 
 const { Navigator, Screen } = createMaterialBottomTabNavigator();
 
 const TabNavigator = (): React.ReactElement => {
 	// TODO: createTypedActions
 	const logout = useStoreActions((actions: Actions<IStore>) => actions.logout);
-	useUser();
 
 	return (
 		<NavigationContainer>
