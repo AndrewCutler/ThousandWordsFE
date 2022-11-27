@@ -1,45 +1,34 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { QueryFunction, QueryKey } from '@tanstack/react-query';
-import { AlbumDTO, Api, ApiConfig, HttpResponse } from './api';
+import { AlbumDTO, Api, HttpResponse, ApiConfig } from './api';
 
 const apiConfig: ApiConfig = {
 	baseUrl: 'https://thousand-words.azurewebsites.net'
 };
 
 export const getUserAlbums = async (userId: string): AlbumDTO[] => {
-  const { api } = new Api(apiConfig);
+	const { api } = new Api(apiConfig);
 
-  const response = await api.albumList({ userId });
+	const response = await api.albumList({
+		userId
+	});
 
-  if (!response.ok) {
-    throw new Error('Failed to retrieve albums by user id.');
-  }
+	if (!response.ok) {
+		throw new Error('Failed to retrieve albums by user id.');
+	}
 
-  return response.data;
+	return response.data;
 };
 
 export const createAlbum = async (userId: string, name: string): HttpResponse<void, any> => {
-	const {
-		api
-	} =
-		new Api(
-			apiConfig
-		);
+	const { api } = new Api(apiConfig);
 
-	const response =
-		await api.albumCreate(
-			{
-				userId,
-				name
-			}
-		);
+	const response = await api.albumCreate({
+		userId,
+		name
+	});
 
-	if (
-		!response.ok
-	) {
-		throw new Error(
-			'Failed to retrieve image by id.'
-		);
+	if (!response.ok) {
+		throw new Error('Failed to retrieve image by id.');
 	}
 
 	return response;
